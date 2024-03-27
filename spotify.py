@@ -49,6 +49,8 @@ class Spotify:
             soup = self.get_webpage(self.song_url)
             self.metatags = soup.findAll("meta")
             metadata = self.get_metadata(self.metatags, "song")
+            self.album_url = f"{metadata.album}"
+            metadata.album = self.get_album()
             return metadata
         except Exception as e:
             self.logger.error(f"Failed to get webpage: {e}")
