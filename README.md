@@ -1,6 +1,6 @@
 # MusicData-Lib
 
-Spotify-Lib is a Python library designed to fetch song and album metadata from Spotify and Deezer without relying on their official APIs. It utilizes web scraping techniques to extract information directly from Spotify's and Deezer's web pages. This library is particularly useful for developers looking to integrate rich music metadata into their applications.
+MusicData-Lib is a Python library designed to fetch song and album metadata from Spotify and Deezer without relying on their official APIs. It utilizes web scraping techniques to extract information directly from Spotify's and Deezer's web pages. This library is particularly useful for developers looking to integrate rich music metadata into their applications.
 
 ## Features
 
@@ -12,7 +12,7 @@ Spotify-Lib is a Python library designed to fetch song and album metadata from S
 
 ## Installation
 
-Spotify-Lib requires the BeautifulSoup library for parsing HTML. Install it using pip:
+MusicData-Lib requires the BeautifulSoup library for parsing HTML. Install it using pip:
 
 ```bash
 pip install beautifulsoup4
@@ -20,7 +20,7 @@ pip install beautifulsoup4
 
 ## Usage
 
-To use Spotify-Lib, import the `Spotify` and `Deezer` classes and create instances by passing a Spotify or Deezer URL or ID and a logger instance. Here's a basic example for both:
+To use MusicData-Lib, import the `Spotify` and `Deezer` classes and create instances by passing a Spotify or Deezer URL or ID and a logger instance. Here's a basic example for both:
 
 ### Spotify
 
@@ -72,7 +72,7 @@ print(album_metadata)
 
 ## Limitations
 
-- Spotify-Lib relies on web scraping, which is less reliable than using an official API. Spotify's and Deezer's web page structure can change, potentially breaking the library.
+- MusicData-Lib relies on web scraping, which is less reliable than using an official API. Spotify's and Deezer's web page structure can change, potentially breaking the library.
 - The library does not support all Spotify and Deezer features. It is focused on fetching basic metadata for songs and albums.
 
 ## Contributing
@@ -81,6 +81,4 @@ Contributions are welcome! If you find a bug or have a feature request, please o
 
 ## License
 
-Spotify-Lib is released under the MIT License. See the [LICENSE](LICENSE) file for more details.
-
-This README provides a clear and concise overview of the Spotify-Lib project, including how to install and use the library, its features, limitations, and contribution guidelines. It's designed to be a comprehensive resource for developers interested in integrating Spotify and Deezer metadata into their applications.
+MusicData-Lib is released under the MIT License. See the [LICENSE](LICENSE) file for more details.
