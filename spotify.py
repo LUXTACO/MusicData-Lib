@@ -11,17 +11,19 @@ class Spotify:
     def __init__(self, url: str, logger: logging.Logger):
         
         self.logger = logger
+        self.experimental = False
         
         if url.find("open.spotify.com") != -1:
             logger.debug("Spotify URL detected!")
             self.found_id = SP_URL_REGEX.search(url.split("?")[0]).group("id")
-            self.found_id = self.found_id.replace("track/", "")
-            self.song_url = f"https://open.spotify.com/track/{self.found_id}"
-            self.album_url = f"https://open.spotify.com/album/{self.found_id}"
+            if self.found_id.find("/") != -1:
+                self.found_id = self.found_id.split("/")[1]
         else:
             logger.debug("Spotify ID detected!")
             self.found_id = url
-            self.song_url = f"https://open.spotify.com/track/{song_id}"
+        
+        self.song_url = f"https://open.spotify.com/track/{self.found_id}"
+        self.album_url = f"https://open.spotify.com/album/{self.found_id}"
         
         logger.debug(f"Song ID: {self.found_id}")
         logger.debug(f"Song URL: {self.song_url}")
@@ -100,7 +102,7 @@ class Spotify:
             logging.error("got error urllib.error.HTTPError with " + song_url)
             return False
         except urllib.error.URLError:
-            logging.error("got error urllib.error.URLError with " + song_urll)
+            logging.error("got error urllib.error.URLError with " + song_url)
             return False
 
         if resp.code != 200:
@@ -246,19 +248,19 @@ class AlbumData:
     
 if __name__ == "__main__":
         
-        logger = logging.getLogger("Spotify")
-        logger.setLevel(logging.DEBUG)
-        logger.addHandler(logging.StreamHandler())
-        
-        spotify = Spotify("https://open.spotify.com/intl-es/track/0ax4ZXW4EOk4zUvdP9Fu2H", logger)
-        song_metadata = spotify.get_song()
-        spotify = Spotify("https://open.spotify.com/album/1vLfxO3ZzXc9k2EGPGLwX6", logger)
-        album_metadata = spotify.get_album()
-        
-        print("\nOrder: artwork_url, duration, genre, album, title, artist, release_date")
-        
-        print(song_metadata, "\n", song_metadata.artwork_url, "\n", song_metadata.duration, "\n", song_metadata.genre, "\n", song_metadata.album, "\n", song_metadata.title, "\n", song_metadata.artist, "\n", song_metadata.release_date, "\n")
-        
-        print("\nOrder: artwork_url, title, artist, description, release_date")
-        
-        print(album_metadata, "\n", album_metadata.artwork_url, "\n", album_metadata.title, "\n", album_metadata.artist, "\n", album_metadata.description, "\n", album_metadata.release_date, "\n")
+    logger = logging.getLogger("Spotify")
+    logger.setLevel(logging.DEBUG)
+    logger.addHandler(logging.StreamHandler())
+    
+    spotify = Spotify("https://open.spotify.com/intl-es/track/0ax4ZXW4EOk4zUvdP9Fu2H", logger)
+    song_metadata = spotify.get_song()
+    spotify = Spotify("https://open.spotify.com/album/1vLfxO3ZzXc9k2EGPGLwX6", logger)
+    album_metadata = spotify.get_album()
+    
+    print("\nOrder: artwork_url, duration, genre, album, title, artist, release_date")
+    
+    print(song_metadata, "\n", song_metadata.artwork_url, "\n", song_metadata.duration, "\n", song_metadata.genre, "\n", song_metadata.album, "\n", song_metadata.title, "\n", song_metadata.artist, "\n", song_metadata.release_date, "\n")
+    
+    print("\nOrder: artwork_url, title, artist, description, release_date")
+    
+    print(album_metadata, "\n", album_metadata.artwork_url, "\n", album_metadata.title, "\n", album_metadata.artist, "\n", album_metadata.description, "\n", album_metadata.release_date, "\n")
